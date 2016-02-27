@@ -1,0 +1,132 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:local="clr-namespace:WPF_MaterialDesignApp">
+    
+    <!-- General list styles -->
+    <Style x:Key="DayWeekStyle" TargetType="TextBlock">
+        <Setter Property="TextAlignment" Value="Center"/>
+        <Setter Property="Foreground" Value="{DynamicResource MainTextColor}"/>
+    </Style>
+
+    <Style x:Key="DayStyle" TargetType="TextBlock" BasedOn="{StaticResource DayWeekStyle}">
+        <Setter Property="FontSize" Value="20"/>
+    </Style>
+
+
+    <Style x:Key="CustomListViewItemStyle" TargetType="ListViewItem">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="ListViewItem">
+                    <Border x:Name="border" Background="Transparent">
+                        <!--<VisualStateManager.VisualStateGroups>
+                            <VisualStateGroup x:Name="CommonStates">
+                                <VisualState x:Name="Normal" />
+                                <VisualState x:Name="Disabled" />
+                            </VisualStateGroup>
+                            <VisualStateGroup x:Name="SelectionStates">
+                                <VisualState x:Name="Unselected" />
+                                <VisualState x:Name="Selected">
+                                    <Storyboard>
+                                        <ColorAnimationUsingKeyFrames Storyboard.TargetName="border"
+                                                              Storyboard.TargetProperty="(Panel.Background).(SolidColorBrush.Color)">
+                                            <EasingColorKeyFrame KeyTime="0" Value="LightBlue" />
+                                        </ColorAnimationUsingKeyFrames>
+                                    </Storyboard>
+                                </VisualState>
+                                <VisualState x:Name="SelectedUnfocused">
+                                    <Storyboard>
+                                        <ColorAnimationUsingKeyFrames Storyboard.TargetName="border"
+                                                              Storyboard.TargetProperty="(Panel.Background).(SolidColorBrush.Color)">
+                                            <EasingColorKeyFrame KeyTime="0" Value="SkyBlue" />
+                                        </ColorAnimationUsingKeyFrames>
+                                    </Storyboard>
+                                </VisualState>
+                            </VisualStateGroup>
+                        </VisualStateManager.VisualStateGroups>-->
+                        <ContentPresenter/>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!-- Template for inner list -->
+    <DataTemplate x:Key="InnerListViewItemTemplate">
+        <Border Margin="10,0,10,0">
+            <Expander>
+                <Expander.Header>
+                    <TextBlock Text="{Binding TimeAndName}" TextWrapping="Wrap" FontSize="14" Foreground="{DynamicResource MainTextColor}"/>
+                </Expander.Header>
+                <Border Padding="10,10,10,10">
+                    <TextBlock Text="{Binding Details}" TextWrapping="Wrap" FontSize="14" Foreground="{DynamicResource TextListColor}"/>
+                </Border>
+            </Expander>
+        </Border>
+    </DataTemplate>
+    
+    <!-- Style for the list view item -->
+    <Style x:Key="ListViewItemStyle" TargetType="{x:Type ListViewItem}">
+        <Setter Property="Template" Value="{DynamicResource SingleItemTemplate}"/>
+
+        <!-- Define triggers for multi/single select style -->
+        <Style.Triggers>
+            <DataTrigger Binding="{Binding IsMultiSelect}" Value="False">
+                <Setter Property="Template" Value="{DynamicResource SingleItemTemplate}"/>
+            </DataTrigger>
+
+            <DataTrigger Binding="{Binding IsMultiSelect}" Value="True">
+                <Setter Property="Template" Value="{DynamicResource MultiItemTemplate}"/>
+            </DataTrigger>
+        </Style.Triggers>
+    </Style>
+
+    <!-- Template of the single item -->
+    <ControlTemplate x:Key="SingleItemTemplate">
+        <Grid Margin="0,0,100,0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="50"/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+
+            <StackPanel Margin="10,10,10,10">
+                <TextBlock Text="{Binding Day}" Style="{DynamicResource MainTextStyle}"
+                           TextAlignment="Center" FontSize="20"/>
+                <TextBlock Text="{Binding DayOfWeekText}" Style="{DynamicResource MainTextStyle}"
+                           TextAlignment="Center"/>
+            </StackPanel>
+
+            <Border Grid.Column="1" Background="{DynamicResource InactiveBackgroundColor}" Margin="10,15,10,15" CornerRadius="1,1,1,1">
+                <TextBlock Text="No records for this date" Foreground="{DynamicResource InactiveTextColor}"
+                           VerticalAlignment="Center" HorizontalAlignment="Left"
+                           Style="{StaticResource CommonTextSize}"
+                           Padding="10,0,0,0"/>
+            </Border>
+        </Grid>
+    </ControlTemplate>
+    
+    <!-- Template for the multi item -->
+    <ControlTemplate x:Key="MultiItemTemplate">
+        <Grid Margin="0,0,100,0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="50"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <!-- Day representation -->
+            <StackPanel Margin="10,10,10,10">
+                <TextBlock Text="{Binding Day}" Style="{DynamicResource MainTextStyle}"
+                           TextAlignment="Center" FontSize="20"/>
+                <TextBlock Text="{Binding DayOfWeekText}" Style="{DynamicResource MainTextStyle}"
+                           TextAlignment="Center"/>
+            </StackPanel>
+
+            <!-- Records for the day -->
+            <ListView Grid.Column="1" ItemsSource="{Binding RecordsList}" BorderBrush="{x:Null}"
+                     ItemTemplate="{StaticResource InnerListViewItemTemplate}" Background="Transparent"
+                     ItemContainerStyle="{StaticResource CustomListViewItemStyle}"
+                     HorizontalAlignment="Stretch" Padding="-2,0,-2,0"
+                     ScrollViewer.HorizontalScrollBarVisibility="Disabled"/>
+            
+        </Grid>
+    </ControlTemplate>
+</ResourceDictionary>
