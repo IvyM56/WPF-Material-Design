@@ -5,6 +5,7 @@ namespace WPF_MaterialDesignApp.Model
 {
     /// <summary>
     /// Gets demo data.
+    /// todo: singleton would be nice.
     /// </summary>
     public sealed class MyDataSource
     {

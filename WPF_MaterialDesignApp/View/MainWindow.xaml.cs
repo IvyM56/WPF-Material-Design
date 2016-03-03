@@ -15,14 +15,14 @@ namespace WPF_MaterialDesignApp
     /// </summary>
     public partial class MainWindow : Window
     {
+        private bool isLeftPanelOpen;
+        private Border border;
+        private AdornerContainer adornerContainer;
+
         public MainWindow()
         {
             this.InitializeComponent();
         }
-
-        private bool isLeftPanelOpen;
-        private Border border;
-        private AdornerContainer adornerContainer;
 
         private void HideLeftPaneButtonClick(object sender, RoutedEventArgs e)
         {
@@ -33,8 +33,7 @@ namespace WPF_MaterialDesignApp
         {
             Storyboard showPanelAnimation = this.LeftPane.Resources["showLeftPanel"] as Storyboard;
             showPanelAnimation.Begin(this.LeftPane);
-            //(this.MainScreen.Resources["LessOpacity"] as Storyboard).Begin();
-            
+           
             var adornerLayer = AdornerLayer.GetAdornerLayer(this.MainScreen);
             if (adornerLayer == null)
                 return;
@@ -85,7 +84,6 @@ namespace WPF_MaterialDesignApp
                 this.adornerContainer = null;
                 this.border = null;
             }
-            //(this.MainScreen.Resources["MoreOpacity"] as Storyboard).Begin();
             this.isLeftPanelOpen = false;
         }
 

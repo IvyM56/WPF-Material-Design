@@ -12,7 +12,7 @@
         d:DesignHeight="700"
         Height="700" Width="1050" MinHeight="520" MinWidth="600"
         WindowStartupLocation="CenterScreen"
-        Title="Calendar Window - MVVM from scratch" ResizeMode="CanResize" BorderBrush="Black">
+        Title="Events Calendar" ResizeMode="CanResize" BorderBrush="Black">
     <Window.DataContext>
         <ViewModel:CalendarWindowViewModel/>
     </Window.DataContext>
@@ -94,11 +94,53 @@
                             <ColumnDefinition/>
                         </Grid.ColumnDefinitions>
 
-                        <!-- Calendar -->
-                        <Border Grid.Column="0" CornerRadius="1,1,1,1">
-                        <Calendar  Width="350" Margin="30,30,100,0"
-                                  Style="{DynamicResource IvyCalendarStyle}" DisplayMode="Month"
-                                  CalendarDayButtonStyle="{DynamicResource IvyCalendarDayButtonStyle}"/>
+                        <Border Grid.Column="0">
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="*"/>
+                                </Grid.RowDefinitions>
+                                
+                                <!-- Calendar -->
+                                <Calendar Grid.Row="0" Width="300" Margin="30,30,150,0"
+                                      Style="{DynamicResource IvyCalendarStyle}" DisplayMode="Month"
+                                      CalendarDayButtonStyle="{DynamicResource IvyCalendarDayButtonStyle}"/>
+
+                                <!-- ToDo: some staff for future -->
+                                <!--<StackPanel Grid.Row="1" Width="300" Margin="30,0,150,0" >
+                                    
+                                    --><!-- Add new records form --><!--
+                                    <ToggleButton Margin="0,10,0,10" Style="{StaticResource FloatingActionStyle}" Height="56" Width="56"
+                                              HorizontalAlignment="Left">
+                                        <Viewbox Width="24" Height="24">
+                                            <Canvas Width="24" Height="24">
+                                                <Path Data="M19,13H13V19H11V13H5V11H11V5H13V11H19V13Z" Fill="White" />
+                                            </Canvas>
+                                        </Viewbox>
+                                    </ToggleButton>
+
+                                    <Grid Background="White">
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition/>
+                                            <RowDefinition/>
+                                        </Grid.RowDefinitions>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="Auto"/>
+                                            <ColumnDefinition/>
+                                        </Grid.ColumnDefinitions>
+
+                                        <Label Content="Caption:" Foreground="{DynamicResource MainTextColor}" HorizontalAlignment="Left"
+                                           VerticalAlignment="Center"/>
+                                        <TextBox Grid.Row="0" Grid.Column="1" x:Name="CaptionTextBox" Width="250" HorizontalAlignment="Left"
+                                             Margin="10,10,10,10" Height="30" BorderThickness="0,0,0,1"/>
+                                        <Label Grid.Row="1" Content="Details:" Foreground="{DynamicResource MainTextColor}"
+                                           VerticalAlignment="Center"/>
+                                        <TextBox Grid.Row="1" Grid.Column="1" x:Name="ContentTextBox" Width="250" HorizontalAlignment="Left"
+                                             Margin="10,10,10,10" Height="30" BorderThickness="0,0,0,1" TextWrapping="Wrap" MaxLines="3"/>
+                                    </Grid>
+                                </StackPanel>-->
+                                
+                            </Grid>
                         </Border>
 
                         <!-- List of dates -->

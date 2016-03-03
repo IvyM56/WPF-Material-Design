@@ -15,7 +15,7 @@
         </Setter>
     </Style>
     
-    <!-- Button -->
+    <!-- Menu button -->
     <Style x:Key="MenuButtonStyle" TargetType="Button">
         <Setter Property="Height" Value="50"/>
         <Setter Property="Background" Value="Transparent"/>
@@ -35,5 +35,21 @@
                 <Setter Property="Background" Value="{DynamicResource ElementHighlightedBackgroundColor}"/>
             </Trigger>
         </Style.Triggers>
+    </Style>
+    
+    <!-- Floating action button style -->
+    <Style x:Key="FloatingActionStyle" TargetType="ToggleButton">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="ToggleButton">
+                    <Border Effect="{DynamicResource z-depth3}">
+                    <Grid>
+                    <Ellipse Fill="Purple"/>
+                        <ContentPresenter HorizontalAlignment="Center" Content="{TemplateBinding Content}" VerticalAlignment="Center"/>
+                    </Grid>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
     </Style>
 </ResourceDictionary>

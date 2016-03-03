@@ -6,6 +6,7 @@ namespace WPF_MaterialDesignApp.View.Sources.Converters
 {
     /// <summary>
     /// Converts passed value with several converters.
+    /// todo: chainresponsibility wouild be nice to use.
     /// </summary>
     public sealed class ChainConverter : IValueConverter
     {
